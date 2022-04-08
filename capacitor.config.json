@@ -1,0 +1,6 @@
+{
+  "appId": "com.callizaya.enfocate",
+  "appName": "enfocate",
+  "webDir": "public",
+  "bundledWebRuntime": false
+}
