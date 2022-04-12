@@ -291,13 +291,12 @@
 	class="background"
 >
 	<filter id="blurMe">
-		<feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+		<feGaussianBlur in="SourceGraphic" stdDeviation="2" />
 	</filter>
 
 	<image
-		href="https://yari-demos.prod.mdn.mozit.cloud/en-US/docs/Web/SVG/Element/image/mdn_logo_only_color.png"
+		href="background.jpg"
 		filter="url(#blurMe)"
-		width="100%"
 		height="100%"
 	/>
 </svg>
