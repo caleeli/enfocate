@@ -26,6 +26,7 @@
 	let currentTask = getNextPendingTaskAfter(-1);
 	let nextTask = null;
 	let previousTask = null;
+	let taskBeforeCreate = null;
 	let taskStatus = ""; //currentTask?.status || INACTIVE_STATUS;
 	let flickStartX;
 	let flickStartY;
@@ -80,6 +81,7 @@
 		taskEffect = "";
 		recognition.stop();
 		textarea.value = "";
+		currentTask = taskBeforeCreate;
 	}
 	function oncancel() {
 		cancelCurrentTask();
@@ -89,6 +91,7 @@
 	}
 	async function onadd() {
 		taskEffect = "creating-task";
+		taskBeforeCreate = currentTask;
 		currentTask = null;
 		await tick();
 		setTimeout(async () => {
@@ -236,6 +239,9 @@
 		}
 	}
 	function flickEnd() {
+		if (taskEffect !== "") {
+			return;
+		}
 		speed = Math.min(
 			1000,
 			Math.max(
