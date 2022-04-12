@@ -48,6 +48,13 @@ export function completeTask(task) {
 export function startTask(task) {
 	let currentTask;
 	tasksStore.update(value => {
+		// Stop all the active tasks
+		value.forEach(t => {
+			if (t.status === ACTIVE_STATUS) {
+				t.status = INACTIVE_STATUS;
+			}
+		});
+		// Start task
 		currentTask = value.find(t => t.id === task.id);
 		currentTask.status = "active";
 		currentTask.completed_at = new Date().getTime();
@@ -77,6 +84,16 @@ export function pauseTask(task) {
 	tasksStore.update(value => {
 		currentTask = value.find(t => t.id === task.id);
 		currentTask.status = "paused";
+		return value;
+	});
+	return currentTask;
+}
+// Stop task
+export function stopTask(task) {
+	let currentTask;
+	tasksStore.update(value => {
+		currentTask = value.find(t => t.id === task.id);
+		currentTask.status = "inactive";
 		return value;
 	});
 	return currentTask;

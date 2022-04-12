@@ -13,17 +13,20 @@
 		COMPLETED_STATUS,
 		cancelTask,
 		CANCELED_STATUS,
+		stopTask,
+		ACTIVE_STATUS,
 	} from "./store.js";
 
 	let tasks = [];
 	tasksStore.subscribe((value) => {
 		tasks = value;
 	});
+	let WITHOUT_PAUSE = true;
 	let focusTasks = [];
 	let currentTask = getNextPendingTaskAfter(-1);
 	let nextTask = null;
 	let previousTask = null;
-	let taskStatus = currentTask?.status || INACTIVE_STATUS;
+	let taskStatus = ""; //currentTask?.status || INACTIVE_STATUS;
 	let flickStartX;
 	let flickStartY;
 	let speed = 1000;
@@ -31,33 +34,52 @@
 	let delta = 0;
 	let swipe = "";
 	let textarea;
-	let enlapsedTime = 0; // in seconds
-	let maxTime = 1800; // 30 minutes in seconds
+	let enlapsedTime = 0; // in milliseconds
+	let maxTime = 1800000; // 30 minutes in milliseconds
+	let last_lap_bell = new Audio("sounds/last_lap_bell.mp3");
+	let play_last_lap_bell = true;
+	let taskEffect = "";
+	let addTaskEffect = "";
 
 	function onaspect() {}
 	function onplay() {
 		currentTask = startTask(currentTask);
-		taskStatus = currentTask.status;
 		enlapsedTime = 0;
+		play_last_lap_bell = true;
 	}
 	function onpause() {
 		currentTask = pauseTask(currentTask);
-		taskStatus = currentTask.status;
+		// taskStatus = currentTask.status;
 	}
-	function onrecord() {}
+	function onrecord() {
+		// toggle recording
+		recognition.toggle();
+		textarea.focus();
+	}
 	function onreopen() {}
 	function onstop() {
-		taskStatus = INACTIVE_STATUS;
-		currentTask.status = taskStatus;
+		currentTask = stopTask(currentTask);
 	}
 	function oncheck() {
 		completeCurrentTask();
 	}
 	function oncheckadd() {
+		if (textarea.value.trim() === "") {
+			return;
+		}
 		addTask();
 	}
+	function onaddplay() {
+		if (textarea.value.trim() === "") {
+			return;
+		}
+		addTask();
+		onplay();
+	}
 	function onbackadd() {
-		taskStatus = INACTIVE_STATUS;
+		taskEffect = "";
+		recognition.stop();
+		textarea.value = "";
 	}
 	function oncancel() {
 		cancelCurrentTask();
@@ -66,16 +88,18 @@
 		taskStatus = INACTIVE_STATUS;
 	}
 	async function onadd() {
-		taskStatus = "creating-task";
+		taskEffect = "creating-task";
+		currentTask = null;
 		await tick();
 		setTimeout(async () => {
-			taskStatus = "creating";
+			taskEffect = "creating";
 			await tick();
 			textarea.focus();
 			recognition.start({
 				onchange(value) {
 					console.log("value from recognition:", value);
-					textarea.value = value;
+					textarea.value =
+						(textarea.value ? textarea.value + " " : "") + value;
 				},
 				completed() {},
 			});
@@ -87,7 +111,7 @@
 		});
 		textarea.value = "";
 		recognition.stop();
-		taskStatus = currentTask.status;
+		taskEffect = "";
 	}
 	function getNextPendingTaskAfter(currentIndex) {
 		return (
@@ -122,11 +146,11 @@
 			task = getNextPendingTaskAfter(-1);
 		}
 		nextTask = task;
-		taskStatus = "inactive complete-task";
+		taskEffect = "complete-task";
 		await tick();
 		setTimeout(() => {
 			currentTask = nextTask;
-			taskStatus = INACTIVE_STATUS;
+			taskEffect = "";
 		}, speed);
 	}
 	async function cancelCurrentTask() {
@@ -151,12 +175,12 @@
 			return;
 		}
 		nextTask = task;
-		taskStatus = "inactive next-task";
+		taskEffect = "next-task";
 		await tick();
 		setTimeout(() => {
 			previousTask = currentTask;
 			currentTask = nextTask;
-			taskStatus = INACTIVE_STATUS;
+			taskEffect = "";
 			speed = 1000;
 		}, speed);
 	}
@@ -169,11 +193,11 @@
 		}
 		previousTask = pTask;
 		await tick();
-		taskStatus = "inactive previous-task";
+		taskEffect = "previous-task";
 		setTimeout(() => {
 			nextTask = currentTask;
 			currentTask = previousTask;
-			taskStatus = INACTIVE_STATUS;
+			taskEffect = "";
 			speed = 1000;
 		}, speed);
 	}
@@ -230,18 +254,27 @@
 				break;
 		}
 	}
+	function pleaseTakeARest() {
+		if (play_last_lap_bell) {
+			last_lap_bell.play();
+			play_last_lap_bell = false;
+		}
+	}
 	$: {
 		focusTasks = [previousTask, currentTask, nextTask];
 	}
 	setInterval(() => {
-		if (taskStatus === "active") {
-			enlapsedTime = Math.min(maxTime, enlapsedTime + 1);
+		if (currentTask && currentTask.status === ACTIVE_STATUS) {
+			const time = new Date().getTime();
+			enlapsedTime = Math.max(0, time - currentTask.continue_at);
 			currentTask = updateTime(currentTask);
-			if (enlapsedTime === maxTime) {
-				onpause();
+			if (enlapsedTime >= maxTime) {
+				pleaseTakeARest();
 			}
 		}
 	}, 1000);
+	recognition.onstart(() => (addTaskEffect = "recording"));
+	recognition.onend(() => (addTaskEffect = ""));
 </script>
 
 <svg
@@ -275,16 +308,18 @@
 		fill="none"
 		xmlns="http://www.w3.org/2000/svg"
 		xmlns:xlink="http://www.w3.org/1999/xlink"
-		class={`${taskStatus}`}
+		class={`${taskEffect} ${addTaskEffect}`}
 		style={`
 			--speed: ${speed * 0.001}s;
 			--speed05: ${speed * 0.0005}s;
 			--speed025: ${speed * 0.00025}s;
 			--speed075: ${speed * 0.00075}s;
+			--pause_show: ${WITHOUT_PAUSE ? "none" : "block"};
+			--pause_hide: ${WITHOUT_PAUSE ? "block" : "none"};
 		`}
 	>
 		{#each focusTasks as task, index}
-			<g id={`g${index}`}>
+			<g id={`g${index}`} class={task?.status || INACTIVE_STATUS}>
 				<text
 					id="title"
 					x="146"
@@ -347,7 +382,7 @@
 						cx="346"
 						cy="596"
 						r="49.5"
-						fill="#2CC990"
+						fill="#2C82C9"
 						stroke="black"
 					/>
 					<path
@@ -387,12 +422,45 @@
 						}) ${2 * Math.PI * 56}`}
 						style="transform: translate(210px, 596px) rotate(-90deg) translate(-210px, -596px);"
 					/>
+					<text
+						id="title"
+						x="165"
+						y="610"
+						font-size="35"
+						font-weight="800"
+						stroke="black"
+						fill="white"
+					>
+						{task
+							? new Date(enlapsedTime).toISOString().substr(14, 5)
+							: ""}
+					</text>
 				</g>
 				<g
 					id="play"
 					opacity="0.75"
 					on:click={onplay}
 					style={`${!task ? "display:none" : ""}`}
+				>
+					<circle
+						id="Ellipse 2_3"
+						cx="210"
+						cy="596"
+						r="49.5"
+						fill="#2C82C9"
+						stroke="black"
+					/>
+					<path
+						id="Vector 13"
+						d="M189.171 563.791C185.845 566.211 185.845 569.563 185.845 569.563V622.881C185.845 622.881 186.348 626.889 190.541 628.848C194.733 630.808 197.682 628.848 197.682 628.848L240.239 602.434C240.239 602.434 242.927 600.282 242.88 596.075C242.833 591.868 240.239 589.912 240.239 589.912L197.682 563.791C197.682 563.791 192.905 561.074 189.171 563.791Z"
+						fill="white"
+						stroke="black"
+					/>
+				</g>
+				<g
+					id="add_play"
+					opacity="0.75"
+					on:click={onaddplay}
 				>
 					<circle
 						id="Ellipse 2_3"
@@ -438,25 +506,16 @@
 					/>
 				</g>
 				<g id="record" opacity="0.75" on:click={onrecord}>
+					<circle id="Ellipse 3_3" cx="210" cy="708" r="49.5" fill="#2C82C9" stroke="black"/>
+					<path id="Vector 14" d="M204 743.075V732.356C204 732.356 194.649 730.139 189.911 724.504C185.435 719.181 182.996 706.708 182.996 706.708C182.996 706.708 183.795 705 186.558 705C189.911 705 190.899 706.708 190.899 706.708C190.899 706.708 192.009 714.675 195.453 718.898C199.711 724.117 203.273 725.352 210.008 725.349C216.738 725.346 220.307 724.124 224.546 718.898C228.013 714.623 229.037 706.771 229.037 706.771C229.037 706.771 230.057 705 233.568 705C236.354 705 236.972 706.771 236.972 706.771C236.972 706.771 234.504 719.172 230.057 724.472C225.33 730.105 216 732.356 216 732.356V743.075C216 743.075 215.537 744.894 210 744.894C204.463 744.894 204 743.075 204 743.075Z" fill="white" stroke="black"/>
+					<path id="Vector 15" d="M195.107 685.475V708.416C195.107 708.416 195.04 721.9 209.985 721.9C224.93 721.9 224.934 708.416 224.934 708.416V685.475C224.934 685.475 224.934 672 209.985 672C195.036 672 195.107 685.475 195.107 685.475Z" fill="white" stroke="black"/>
+				</g>
+				<g id="recording" opacity="0.75">
 					<circle
-						id="Ellipse 3_3"
 						cx="210"
-						cy="596"
-						r="49.5"
-						fill="#2C82C9"
-						stroke="black"
-					/>
-					<path
-						id="Vector 14"
-						d="M204 631.075V620.356C204 620.356 194.649 618.139 189.911 612.504C185.435 607.181 182.996 594.708 182.996 594.708C182.996 594.708 183.795 593 186.558 593C189.911 593 190.899 594.708 190.899 594.708C190.899 594.708 192.009 602.675 195.453 606.898C199.711 612.117 203.273 613.352 210.008 613.349C216.738 613.346 220.307 612.124 224.546 606.898C228.013 602.623 229.037 594.771 229.037 594.771C229.037 594.771 230.057 593 233.568 593C236.354 593 236.972 594.771 236.972 594.771C236.972 594.771 234.504 607.172 230.057 612.472C225.33 618.105 216 620.356 216 620.356V631.075C216 631.075 215.537 632.894 210 632.894C204.463 632.894 204 631.075 204 631.075Z"
-						fill="white"
-						stroke="black"
-					/>
-					<path
-						id="Vector 15"
-						d="M195.107 573.475V596.416C195.107 596.416 195.04 609.9 209.985 609.9C224.93 609.9 224.934 596.416 224.934 596.416V573.475C224.934 573.475 224.934 560 209.985 560C195.036 560 195.107 573.475 195.107 573.475Z"
-						fill="white"
-						stroke="black"
+						cy="708"
+						fill="transparent"
+						stroke="#2C82C9"
 					/>
 				</g>
 				<g id="stop" opacity="0.75" on:click={onstop}>
@@ -660,8 +719,11 @@
 </div>
 
 <style>
-	:global(body) {
+	:global(body,html) {
 		background-color: black;
+		overflow: hidden;
+		width: 100vw;
+		height: 100vh;
 	}
 
 	#check,
@@ -673,11 +735,13 @@
 	#cancel,
 	#back,
 	#add,
+	#add_play,
 	#reopen,
 	#aspect,
 	#completed,
 	#canceled,
 	#add-task-form,
+	#recording,
 	#check_add {
 		display: none;
 	}
@@ -688,11 +752,17 @@
 	}
 	.active #stop,
 	.active #playing,
-	.active #pause,
 	.active #check,
 	.active #cancel {
 		display: block;
 	}
+	.active #pause {
+		display: var(--pause_show);
+	}
+	.active #timer {
+		display: var(--pause_show);
+	}
+
 	.paused #stop,
 	.paused #play {
 		display: block;
@@ -703,6 +773,7 @@
 	.creating #add-task-form,
 	.creating #record,
 	.creating #check_add,
+	.creating #add_play,
 	.creating #back {
 		display: block;
 	}
@@ -746,8 +817,12 @@
 		text-align: center;
 		font-size: 3em;
 	}
-	#record {
-		animation: blink var(--speed) infinite;
+	.recording #recording {
+		display: block;
+	}
+	.recording #recording circle {
+		display: block;
+		animation: blinkOut 1s infinite;
 	}
 	@keyframes blink {
 		0% {
@@ -758,6 +833,21 @@
 		}
 		100% {
 			opacity: 0.6;
+		}
+	}
+	/* block out effect */
+	@keyframes blinkOut {
+		0% {
+			stroke-width: 0;
+			r: 50;
+		}
+		80% {
+			stroke-width: 8;
+			r: 58;
+		}
+		100% {
+			stroke-width: 0;
+			r: 50;
 		}
 	}
 	/* move to left effect */
