@@ -2,6 +2,7 @@
 	import { tick } from "svelte";
 	import recognition from "./recognition.js";
 	import { translation as _ } from "./translation.js";
+	import Aspectos from "./components/Aspectos.svelte";
 	import {
 		INACTIVE_STATUS,
 		tasksStore,
@@ -15,6 +16,7 @@
 		CANCELED_STATUS,
 		stopTask,
 		ACTIVE_STATUS,
+		setAspects,
 	} from "./store.js";
 
 	let tasks = [];
@@ -41,6 +43,8 @@
 	let play_last_lap_bell = true;
 	let taskEffect = "";
 	let addTaskEffect = "";
+	let listeners = {};
+	let selectedAspects = [];
 
 	function onaspect() {}
 	function onplay() {
@@ -64,17 +68,21 @@
 	function oncheck() {
 		completeCurrentTask();
 	}
-	function oncheckadd() {
+	async function oncheckadd() {
 		if (textarea.value.trim() === "") {
 			return;
 		}
-		addTask();
+		await addTask();
+		console.log("done");
+		setAspects(currentTask, selectedAspects);
+		taskEffect = "";
 	}
-	function onaddplay() {
+	async function onaddplay() {
 		if (textarea.value.trim() === "") {
 			return;
 		}
-		addTask();
+		await addTask();
+		setAspects(currentTask, selectedAspects);
 		onplay();
 	}
 	function onbackadd() {
@@ -100,7 +108,6 @@
 			textarea.focus();
 			recognition.start({
 				onchange(value) {
-					console.log("value from recognition:", value);
 					textarea.value =
 						(textarea.value ? textarea.value + " " : "") + value;
 				},
@@ -114,7 +121,19 @@
 		});
 		textarea.value = "";
 		recognition.stop();
-		taskEffect = "";
+		taskEffect = "choose-aspect";
+		return waitForAction("selected-aspects");
+	}
+	function waitForAction(eventName) {
+		return new Promise((resolve) => {
+			listeners[eventName] = resolve;
+		});
+	}
+	function throwAction(actionName) {
+		console.log(actionName, listeners[actionName]);
+		if (listeners[actionName]) {
+			listeners[actionName](actionName);
+		}
 	}
 	function getNextPendingTaskAfter(currentIndex) {
 		return (
@@ -294,11 +313,7 @@
 		<feGaussianBlur in="SourceGraphic" stdDeviation="2" />
 	</filter>
 
-	<image
-		href="background.jpg"
-		filter="url(#blurMe)"
-		height="100%"
-	/>
+	<image href="background.jpg" filter="url(#blurMe)" height="100%" />
 </svg>
 
 <div
@@ -462,11 +477,7 @@
 						stroke="black"
 					/>
 				</g>
-				<g
-					id="add_play"
-					opacity="0.75"
-					on:click={onaddplay}
-				>
+				<g id="add_play" opacity="0.75" on:click={onaddplay}>
 					<circle
 						id="Ellipse 2_3"
 						cx="210"
@@ -511,9 +522,26 @@
 					/>
 				</g>
 				<g id="record" opacity="0.75" on:click={onrecord}>
-					<circle id="Ellipse 3_3" cx="210" cy="708" r="49.5" fill="#2C82C9" stroke="black"/>
-					<path id="Vector 14" d="M204 743.075V732.356C204 732.356 194.649 730.139 189.911 724.504C185.435 719.181 182.996 706.708 182.996 706.708C182.996 706.708 183.795 705 186.558 705C189.911 705 190.899 706.708 190.899 706.708C190.899 706.708 192.009 714.675 195.453 718.898C199.711 724.117 203.273 725.352 210.008 725.349C216.738 725.346 220.307 724.124 224.546 718.898C228.013 714.623 229.037 706.771 229.037 706.771C229.037 706.771 230.057 705 233.568 705C236.354 705 236.972 706.771 236.972 706.771C236.972 706.771 234.504 719.172 230.057 724.472C225.33 730.105 216 732.356 216 732.356V743.075C216 743.075 215.537 744.894 210 744.894C204.463 744.894 204 743.075 204 743.075Z" fill="white" stroke="black"/>
-					<path id="Vector 15" d="M195.107 685.475V708.416C195.107 708.416 195.04 721.9 209.985 721.9C224.93 721.9 224.934 708.416 224.934 708.416V685.475C224.934 685.475 224.934 672 209.985 672C195.036 672 195.107 685.475 195.107 685.475Z" fill="white" stroke="black"/>
+					<circle
+						id="Ellipse 3_3"
+						cx="210"
+						cy="708"
+						r="49.5"
+						fill="#2C82C9"
+						stroke="black"
+					/>
+					<path
+						id="Vector 14"
+						d="M204 743.075V732.356C204 732.356 194.649 730.139 189.911 724.504C185.435 719.181 182.996 706.708 182.996 706.708C182.996 706.708 183.795 705 186.558 705C189.911 705 190.899 706.708 190.899 706.708C190.899 706.708 192.009 714.675 195.453 718.898C199.711 724.117 203.273 725.352 210.008 725.349C216.738 725.346 220.307 724.124 224.546 718.898C228.013 714.623 229.037 706.771 229.037 706.771C229.037 706.771 230.057 705 233.568 705C236.354 705 236.972 706.771 236.972 706.771C236.972 706.771 234.504 719.172 230.057 724.472C225.33 730.105 216 732.356 216 732.356V743.075C216 743.075 215.537 744.894 210 744.894C204.463 744.894 204 743.075 204 743.075Z"
+						fill="white"
+						stroke="black"
+					/>
+					<path
+						id="Vector 15"
+						d="M195.107 685.475V708.416C195.107 708.416 195.04 721.9 209.985 721.9C224.93 721.9 224.934 708.416 224.934 708.416V685.475C224.934 685.475 224.934 672 209.985 672C195.036 672 195.107 685.475 195.107 685.475Z"
+						fill="white"
+						stroke="black"
+					/>
 				</g>
 				<g id="recording" opacity="0.75">
 					<circle
@@ -720,11 +748,30 @@
 		>
 			<textarea bind:this={textarea} />
 		</foreignObject>
+		<g id="aspectos">
+			<Aspectos bind:checked={selectedAspects} />
+			<g opacity="0.75" on:click={() => throwAction("selected-aspects")}>
+				<circle
+					id="Ellipse 2"
+					cx="346"
+					cy="596"
+					r="49.5"
+					fill="#2CC990"
+					stroke="black"
+				/>
+				<path
+					id="Vector 1"
+					d="M364.736 572.467L337.325 600.189L326.697 589.157C326.697 589.157 321.103 584.348 315.788 589.157C310.474 593.966 314.39 600.189 314.39 600.189L331.731 617.728C331.731 617.728 335.334 620.17 337.885 619.991C340.031 619.84 342.92 617.728 342.92 617.728L376.484 583.782C376.484 583.782 380.4 578.691 375.645 573.599C370.89 568.507 364.736 572.467 364.736 572.467Z"
+					fill="white"
+					stroke="black"
+				/>
+			</g>
+		</g>
 	</svg>
 </div>
 
 <style>
-	:global(body,html) {
+	:global(body, html) {
 		background-color: black;
 		overflow: hidden;
 		width: 100vw;
@@ -747,7 +794,8 @@
 	#canceled,
 	#add-task-form,
 	#recording,
-	#check_add {
+	#check_add,
+	#aspectos {
 		display: none;
 	}
 	.inactive #add,
@@ -784,6 +832,14 @@
 	}
 	.creating #title,
 	.creating #status {
+		display: none;
+	}
+	.choose-aspect #aspectos {
+		display: block;
+	}
+	.choose-aspect #g0,
+	.choose-aspect #g1,
+	.choose-aspect #g2 {
 		display: none;
 	}
 	.canceled #reopen,

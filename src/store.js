@@ -26,6 +26,7 @@ export function addNewTask(task) {
 		title: _("New task"),
 		status: INACTIVE_STATUS,
 		time: 0,
+		aspects: [],
 	}, task);
 	tasksStore.update(value => {
 		value.push(task);
@@ -104,6 +105,16 @@ export function cancelTask(task) {
 	tasksStore.update(value => {
 		currentTask = value.find(t => t.id === task.id);
 		currentTask.status = "canceled";
+		return value;
+	});
+	return currentTask;
+}
+// Set aspects
+export function setAspects(task, aspects) {
+	let currentTask;
+	tasksStore.update(value => {
+		currentTask = value.find(t => t.id === task.id);
+		currentTask.aspects = aspects;
 		return value;
 	});
 	return currentTask;
