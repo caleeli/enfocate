@@ -55,7 +55,12 @@
 <g id="Login">
 	<foreignObject x="41" y="200" width="350" height="400">
 		<form on:submit|preventDefault={onsubmit}>
-			<input placeholder={_("email")} bind:value={email} />
+			<input
+				placeholder={_("email")}
+				bind:value={email}
+				autocorrect="off"
+				autocapitalize="none"
+			/>
 			<input
 				placeholder={_("password")}
 				type="password"
