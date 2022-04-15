@@ -63,7 +63,7 @@ export function startTask(task) {
 		// Start task
 		currentTask = value.find(t => t.id === task.id);
 		currentTask.status = "active";
-		currentTask.completed_at = new Date().getTime();
+		currentTask.completed_at = null;
 		// set timestamp
 		if (!currentTask.started_at) {
 			currentTask.started_at = new Date().getTime();
