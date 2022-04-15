@@ -1,3 +1,4 @@
+import debounce from 'lodash.debounce';
 import { writable } from 'svelte/store';
 import { v4 as uuid } from 'uuid';
 import { translation as _ } from "./translation.js";
@@ -12,11 +13,8 @@ export const CANCELED_STATUS = "canceled";
 // STORE //
 const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 export const tasksStore = writable(storedTasks);
-
-// PERSISTANCE //
-tasksStore.subscribe(value => {
-	localStorage.setItem('tasks', JSON.stringify(value));
-});
+const storedUser = JSON.parse(localStorage.getItem('user')) || { id: "", email: "" };
+export const userStore = writable(storedUser);
 
 // ACTIONS //
 // Add new task
@@ -119,3 +117,81 @@ export function setAspects(task, aspects) {
 	});
 	return currentTask;
 }
+// Login user
+export function login(user) {
+	userStore.update(value => {
+		value.id = user.id;
+		value.email = user.email;
+		if (user.tasks) {
+			localStorage.setItem('lastSyncTasks', JSON.stringify(user.tasks));
+			mergeTasks(user.tasks);
+		}
+		return value;
+	});
+	return user;
+}
+export function logout() {
+	userStore.update(value => {
+		value.id = "";
+		value.email = "";
+		return value;
+	});
+}
+function mergeTasks(newTasks) {
+	tasksStore.update(value => {
+		newTasks.forEach(newTask => {
+			let currentTask = value.find(t => t.id === newTask.id);
+			if (currentTask) {
+				// skip already existing tasks
+			} else {
+				value.push(newTask);
+			}
+		});
+		return value;
+	});
+}
+// sync function
+function syncTasks(currentTasks) {
+	userStore.update(currentUser => {
+		if (!currentUser.id) {
+			return currentUser;
+		}
+		const server_api = SERVER_API;
+		const sync_endpoint = `${server_api}/sync/${currentUser.id}`;
+		const lastSyncTasks = JSON.parse(localStorage.getItem('lastSyncTasks')) || [];
+		// filter tasks to sync, only tasks that changed
+		const syncTasks = currentTasks.filter(task => {
+			const last = lastSyncTasks.find(t => t.id === task.id);
+			if (JSON.stringify(task) !== JSON.stringify(last)) {
+				return true;
+			}
+		});
+		// send to api
+		fetch(sync_endpoint, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				tasks: syncTasks
+			})
+		}).then(() => {
+			localStorage.setItem('lastSyncTasks', JSON.stringify(currentTasks));
+		});
+		return currentUser;
+	});
+}
+
+// PERSISTANCE //
+let lastSyncTasks = [];
+// debounce sync function 30 seconds
+const debounceSyncTasks = debounce(syncTasks, 30000, {
+	maxWait: 30000
+});
+tasksStore.subscribe(value => {
+	localStorage.setItem('tasks', JSON.stringify(value));
+	debounceSyncTasks(value);
+});
+userStore.subscribe(value => {
+	localStorage.setItem('user', JSON.stringify(value));
+});

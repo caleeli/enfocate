@@ -1102,6 +1102,6 @@
 		opacity: 0.75;
 	}
 	.unchecked {
-		opacity: 0.55;
+		opacity: 0.35;
 	}
 </style>

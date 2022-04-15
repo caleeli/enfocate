@@ -1,7 +1,9 @@
 html, body {
 	position: relative;
-	width: 100%;
-	height: 100%;
+	background-color: black;
+	overflow: hidden;
+	width: 100vw;
+	height: 100vh;
 }
 
 body {
@@ -29,35 +31,249 @@ label {
 	display: block;
 }
 
-input, button, select, textarea {
-	font-family: inherit;
-	font-size: inherit;
+input {
+	font-size: 2em;
 	-webkit-padding: 0.4em 0;
 	padding: 0.4em;
 	margin: 0 0 0.5em 0;
 	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 2px;
-}
-
-input:disabled {
-	color: #ccc;
+	border: 1px solid #000;
+	border-radius: 8px;
+	width: 100%;
 }
 
 button {
-	color: #333;
-	background-color: #f4f4f4;
+	font-size: 2em;
+	-webkit-padding: 0.4em 0;
+	padding: 0.4em;
+	margin: 0 0 0.5em 0;
+	box-sizing: border-box;
+	border: 1px solid #000;
+	border-radius: 8px;
+	width: 100%;
+}
+button[type="submit"] {
+	background-color: #2C82C9;
+	color: white;
+}
+button[type="reset"] {
+	background-color: #FC6042;
+	color: white;
+}
+
+#check,
+#playing,
+#play,
+#pause,
+#record,
+#stop,
+#cancel,
+#back,
+#add,
+#add_play,
+#reopen,
+#completed,
+#canceled,
+#add-task-form,
+#recording,
+#check_add,
+#aspectos {
+	display: none;
+}
+.inactive #add,
+.inactive #play,
+.inactive #cancel {
+	display: block;
+}
+.active #stop,
+.active #playing,
+.active #check,
+.active #cancel {
+	display: block;
+}
+.active #pause {
+	display: var(--pause_show);
+}
+.active #timer {
+	display: var(--pause_show);
+}
+
+.paused #stop,
+.paused #play {
+	display: block;
+}
+.paused #status {
+	animation: blink var(--speed) infinite;
+}
+.creating #add-task-form,
+.creating #record,
+.creating #check_add,
+.creating #add_play,
+.creating #back {
+	display: block;
+}
+.creating #title,
+.creating #status,
+.creating #add {
+	display: none;
+}
+.choose-aspect #aspectos {
+	display: block;
+}
+.choose-aspect #g0,
+.choose-aspect #g1,
+.choose-aspect #g2 {
+	display: none;
+}
+.canceled #reopen,
+.canceled #canceled {
+	display: block;
+}
+.completed #reopen,
+.completed #completed {
+	display: block;
+}
+
+div.main {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	display: flex;
+	justify-content: center;
+	width: 100vw;
+	height: 100vh;
+}
+.background {
+	opacity: 0.7;
+}
+.title {
+	color: white;
+	text-align: center;
+	font-size: 3em;
+}
+#add-task-form textarea {
+	width: 100%;
+	height: 100%;
+	background-color: transparent;
+	border: none;
 	outline: none;
+	color: white;
+	text-align: center;
+	font-size: 3em;
 }
-
-button:disabled {
-	color: #999;
+.recording #recording {
+	display: block;
 }
-
-button:not(:disabled):active {
-	background-color: #ddd;
+.recording #recording circle {
+	display: block;
+	animation: blinkOut 1s infinite;
 }
-
-button:focus {
-	border-color: #666;
+@keyframes blink {
+	0% {
+		opacity: 0.6;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0.6;
+	}
+}
+/* block out effect */
+@keyframes blinkOut {
+	0% {
+		stroke-width: 0;
+		r: 50;
+	}
+	80% {
+		stroke-width: 8;
+		r: 58;
+	}
+	100% {
+		stroke-width: 0;
+		r: 50;
+	}
+}
+/* move to left effect */
+#g0 {
+	transform: translateX(-432px);
+}
+#g1 {
+	transform: translateX(0px);
+}
+#g2 {
+	transform: translateX(432px);
+}
+.complete-task #g1 {
+	animation: moveToBottom var(--speed05) forwards;
+}
+.complete-task #g2 {
+	animation: moveToLeft2 var(--speed075) forwards;
+	animation-delay: var(--speed025);
+}
+.next-task #g1 {
+	animation: moveToLeft1 var(--speed) forwards;
+}
+.next-task #g2 {
+	animation: moveToLeft2 var(--speed) forwards;
+}
+.previous-task #g1 {
+	animation: moveToRight1 var(--speed) forwards;
+}
+.previous-task #g0 {
+	animation: moveToRight0 var(--speed) forwards;
+}
+.creating-task #g1 {
+	animation: moveToBottom var(--speed05) forwards;
+}
+.creating-task #add-task-form {
+	animation: fadeIn var(--speed05) forwards;
+}
+@keyframes moveToLeft1 {
+	0% {
+		transform: translateX(0px);
+	}
+	100% {
+		transform: translateX(-432px);
+	}
+}
+@keyframes moveToLeft2 {
+	0% {
+		transform: translateX(432px);
+	}
+	100% {
+		transform: translateX(0px);
+	}
+}
+@keyframes moveToRight1 {
+	0% {
+		transform: translateX(0px);
+	}
+	100% {
+		transform: translateX(432px);
+	}
+}
+@keyframes moveToRight0 {
+	0% {
+		transform: translateX(-432px);
+	}
+	100% {
+		transform: translateX(0px);
+	}
+}
+@keyframes moveToBottom {
+	0% {
+		transform: translateY(0px);
+	}
+	100% {
+		transform: translateY(768px);
+	}
+}
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
