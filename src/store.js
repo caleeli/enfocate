@@ -1,7 +1,14 @@
+import { Http } from '@capacitor-community/http';
 import debounce from 'lodash.debounce';
 import { writable } from 'svelte/store';
 import { v4 as uuid } from 'uuid';
 import { translation as _ } from "./translation.js";
+
+// Check if runs on browser
+const isBrowser = typeof Capacitor === 'undefined';
+
+// get server_api from .env
+const server_api = SERVER_API;
 
 // CONSTANTS //
 export const INACTIVE_STATUS = "inactive";
@@ -117,11 +124,41 @@ export function setAspects(task, aspects) {
 	});
 	return currentTask;
 }
+// Simple api function
+function api(url, options) {
+	if (isBrowser) {
+		return fetch(url, {
+			method: options.method,
+			headers: options.headers,
+			body: JSON.stringify(options.data)
+		}).then((res) => res.json());
+	} else {
+		return Http.request({
+			url,
+			method: options.method,
+			headers: options.headers,
+			data: options.data,
+		}).then(res => res.data);
+	}
+}
 // Login user
-export function login(user) {
+export async function login(email, password) {
+	const login_endpoint = `${server_api}/login`;
+	const res = await api(login_endpoint, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		data: { email, password },
+	});
+	if (res.status !== "success") {
+		throw res.message;
+	}
+	let user = res.user;
 	userStore.update(value => {
 		value.id = user.id;
 		value.email = user.email;
+		user = value;
 		if (user.tasks) {
 			localStorage.setItem('lastSyncTasks', JSON.stringify(user.tasks));
 			mergeTasks(user.tasks);
@@ -156,7 +193,6 @@ function syncTasks(currentTasks) {
 		if (!currentUser.id) {
 			return currentUser;
 		}
-		const server_api = SERVER_API;
 		const sync_endpoint = `${server_api}/sync/${currentUser.id}`;
 		const lastSyncTasks = JSON.parse(localStorage.getItem('lastSyncTasks')) || [];
 		// filter tasks to sync, only tasks that changed
@@ -167,14 +203,14 @@ function syncTasks(currentTasks) {
 			}
 		});
 		// send to api
-		fetch(sync_endpoint, {
+		api(sync_endpoint, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({
+			data: {
 				tasks: syncTasks
-			})
+			}
 		}).then(() => {
 			localStorage.setItem('lastSyncTasks', JSON.stringify(currentTasks));
 		});

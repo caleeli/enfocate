@@ -14,36 +14,13 @@
 		}
 	});
 
-	// get server_api from .env
-	const server_api = SERVER_API;
-	const login_endpoint = `${server_api}/login`;
-
-	function onsubmit() {
-		const data = {
-			email: email,
-			password: password,
-		};
-
-		fetch(login_endpoint, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(data),
-		})
-			.then((res) => res.json())
-			.then((res) => {
-				if (res.status === "success") {
-					login(res.user);
-					push("/");
-				} else {
-					alert(res.message);
-				}
-			})
-			.catch((err) => {
-				console.log(err);
-				alert(_("error_login"));
-			});
+	async function onsubmit() {
+		try {
+			await login(email, password);
+			push("/");
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	function onlogout() {

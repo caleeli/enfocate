@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@awesome-cordova-plugins/speech-recognition": "^5.41.0",
+    "@capacitor-community/http": "^1.4.1",
     "@capacitor/android": "^3.4.3",
     "@capacitor/core": "^3.4.3",
     "@rollup/plugin-replace": "^4.0.0",
