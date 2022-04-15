@@ -2,6 +2,7 @@
 
 use App\Controllers\LoginController;
 use App\Controllers\SyncController;
+use App\Controllers\TasksController;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -17,6 +18,7 @@ $controller = array_shift($path);
 $controllers = [
     'login' => LoginController::class,
     'sync' => SyncController::class,
+    'tasks' => TasksController::class,
 ];
 
 if (!isset($controllers[$controller])) {
