@@ -6,6 +6,14 @@ use App\Controllers\TasksController;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+chdir(__DIR__ . '/../');
+$env_file = __DIR__ . '/../.env';
+if (file_exists($env_file)) {
+    foreach (parse_ini_file($env_file) as $key=>$value) {
+        $_ENV[$key] = $value;
+    }
+}
+
 // Enable CORS
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");

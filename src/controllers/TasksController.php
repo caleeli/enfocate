@@ -2,22 +2,34 @@
 
 namespace App\Controllers;
 
-class TasksController
+class TasksController extends Controller
 {
     public function options()
     {
         return "";
     }
 
-    public function get()
+    public function get($userId)
     {
-        // Get saved tasks
-        $file = __DIR__ . '/../../resources/tasks.json';
-        if (file_exists($file)) {
-            $tasks = json_decode(file_get_contents($file), true);
+        $token = $this->getToken();
+        $connection = $this->getConnection();
+        $statement = $connection->prepare('SELECT id FROM users WHERE token = :token and is_admin=1');
+        $statement->execute([
+            'token' => $token,
+        ]);
+        $user = $statement->fetch();
+        if ($user) {
+            $statement = $connection->prepare('SELECT * FROM users WHERE id = :id');
+            $statement->execute([
+                'id' => $userId,
+            ]);
+            $user = $statement->fetch();
+            return json_decode($user['tasks']) ?: [];
         } else {
-            $tasks = [];
+            http_response_code(401);
+            header('Content-Type: application/json');
+            echo json_encode(['error' => 'Unauthorized']);
+            exit;
         }
-        return $tasks;
     }
 }

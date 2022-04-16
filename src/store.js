@@ -6,6 +6,7 @@ import { translation as _ } from "./translation.js";
 
 // Check if runs on browser
 const isBrowser = typeof Capacitor === 'undefined';
+let token = null;
 
 // get server_api from .env
 const server_api = SERVER_API;
@@ -158,6 +159,7 @@ export async function login(email, password) {
 	userStore.update(value => {
 		value.id = user.id;
 		value.email = user.email;
+		token = user.token;
 		user = value;
 		if (user.tasks) {
 			localStorage.setItem('lastSyncTasks', JSON.stringify(user.tasks));
@@ -206,7 +208,8 @@ function syncTasks(currentTasks) {
 		api(sync_endpoint, {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`,
 			},
 			data: {
 				tasks: syncTasks
