@@ -16,13 +16,12 @@ class LoginController extends Controller
         $data = json_decode($json, true);
         // Verify login
         $connection = $this->getConnection();
-        $statement = $connection->prepare('SELECT * FROM users WHERE email = :email and password = :password');
+        $statement = $connection->prepare('SELECT * FROM users WHERE email = :email');
         $statement->execute([
-            'email' => $data['email'],
-            'password' => password_hash($data['password'], PASSWORD_DEFAULT),
+            'email' => $data['email']
         ]);
         $user = $statement->fetch();
-        if ($user) {
+        if ($user && password_verify($data['password'], $user['password'])) {
             $token = bin2hex(random_bytes(32));
             $statement = $connection->prepare('UPDATE users SET token = :token WHERE id = :id');
             $statement->execute([
