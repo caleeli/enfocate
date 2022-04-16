@@ -1,4 +1,3 @@
-// import { SpeechRecognition } from '@awesome-cordova-plugins/speech-recognition/ngx';
 import App from './App.svelte';
 
 const app = new App({

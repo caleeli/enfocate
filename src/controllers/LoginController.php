@@ -11,11 +11,15 @@ class LoginController extends Controller
 
     public function post()
     {
+        // Get json from body
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, true);
+        // Verify login
         $connection = $this->getConnection();
         $statement = $connection->prepare('SELECT * FROM users WHERE email = :email and password = :password');
         $statement->execute([
-            'email' => $_POST['email'],
-            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+            'email' => $data['email'],
+            'password' => password_hash($data['password'], PASSWORD_DEFAULT),
         ]);
         $user = $statement->fetch();
         if ($user) {
