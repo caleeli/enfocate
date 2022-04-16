@@ -161,6 +161,7 @@ div.main {
 	outline: none;
 	color: white;
 	text-align: center;
+	font-family: inherit;
 	font-size: 3em;
 }
 .recording #recording {
