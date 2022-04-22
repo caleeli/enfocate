@@ -2,11 +2,13 @@
 	import { translation as _ } from "./translation.js";
 	import Login from "./components/Login.svelte";
 	import Home from "./components/Home.svelte";
+	import CompletedList from "./components/CompletedList.svelte";
 	import Router from "svelte-spa-router";
 
 	let routes = {
 		"/": Home,
 		"/login": Login,
+		"/completed": CompletedList,
 	};
 
 </script>
@@ -22,7 +24,7 @@
 		<feGaussianBlur in="SourceGraphic" stdDeviation="2" />
 	</filter>
 
-	<image href="background.jpg" filter="url(#blurMe)" height="100%" />
+	<image href="background.jpg" filter="url(#blurMe)" class="bg-image" />
 </svg>
 
 <div

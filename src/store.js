@@ -111,6 +111,22 @@ export function cancelTask(task) {
 	tasksStore.update(value => {
 		currentTask = value.find(t => t.id === task.id);
 		currentTask.status = "canceled";
+		currentTask.canceled_at = new Date().getTime();
+		return value;
+	});
+	return currentTask;
+}
+export function removeTask(task) {
+	tasksStore.update(value => {
+		value.splice(value.indexOf(task), 1);
+		return value;
+	});
+}
+export function reopenTask(task) {
+	let currentTask;
+	tasksStore.update(value => {
+		currentTask = value.find(t => t.id === task.id);
+		currentTask.status = "inactive";
 		return value;
 	});
 	return currentTask;

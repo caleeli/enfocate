@@ -3,6 +3,7 @@
 	import { translation as _ } from "../translation.js";
 	import Aspectos from "./Aspectos.svelte";
 	import recognition from "../recognition.js";
+	import { LocalNotifications } from "@capacitor/local-notifications";
 	import {
 		INACTIVE_STATUS,
 		tasksStore,
@@ -51,15 +52,33 @@
 	let addTaskEffect = "";
 	let listeners = {};
 	let selectedAspects = [];
+	LocalNotifications.addListener(
+		"localNotificationReceived",
+		() => {
+			pleaseTakeARest();
+		}
+	)
 
 	function onlogin() {
 		// route to login
 		push("/login");
 	}
-	function onplay() {
+	async function onplay() {
 		currentTask = startTask(currentTask);
 		enlapsedTime = 0;
 		play_last_lap_bell = true;
+		const notifications = [
+			{
+				id: new Date().getTime(),
+				title: _("Enfocate"),
+				body: _("Toma un descanso"),
+				schedule: {
+					at: new Date(new Date().getTime() + maxTime),
+					allowWhileIdle: true,
+				},
+			},
+		];
+		await LocalNotifications.schedule({ notifications });
 	}
 	function onpause() {
 		currentTask = pauseTask(currentTask);
@@ -233,6 +252,14 @@
 			speed = 1000;
 		}, speed);
 	}
+	async function goCompletedList(direction) {
+		taskEffect = `move-${direction}-task`;
+		await tick();
+		setTimeout(() => {
+			taskEffect = "";
+			push("/completed");
+		}, speed * 0.35);
+	}
 	function flickStart(event) {
 		let touch = event.touches[0];
 		flickStartX = touch.pageX;
@@ -287,10 +314,15 @@
 			case "right":
 				goPreviousTask();
 				break;
+			case "up":
+			case "down":
+				goCompletedList(swipe);
+				break;
 		}
 	}
 	function pleaseTakeARest() {
 		if (play_last_lap_bell) {
+			console.log("pleaseTakeARest() take a rest");
 			last_lap_bell.play();
 			play_last_lap_bell = false;
 		}
@@ -340,7 +372,7 @@
 				stroke="black"
 				fill="white"
 			>
-				{task ? new Date(task.time).toISOString().substr(11, 8) : ""}
+				{task ? new Date(task.time).toISOString().substring(11, 11+8) : ""}
 			</text>
 			<text
 				id="status"

@@ -2,5 +2,11 @@
   "appId": "com.callizaya.enfocate",
   "appName": "enfocate",
   "webDir": "public",
-  "bundledWebRuntime": false
+  "bundledWebRuntime": false,
+  "plugins": {
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_icon_config_sample",
+      "iconColor": "#FF00FF"
+    }
+  }
 }
