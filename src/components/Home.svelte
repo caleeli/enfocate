@@ -322,9 +322,12 @@
 	}
 	function pleaseTakeARest() {
 		if (play_last_lap_bell) {
-			console.log("pleaseTakeARest() take a rest");
-			last_lap_bell.play();
 			play_last_lap_bell = false;
+			try {
+				last_lap_bell.play();
+			} catch (e) {
+				console.error(e);
+			}
 		}
 	}
 	$: {
