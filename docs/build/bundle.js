@@ -1,5 +1,5 @@
 
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 var app = (function () {
     'use strict';
 
@@ -4892,7 +4892,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (718:4) {:else}
+    // (721:4) {:else}
     function create_else_block(ctx) {
     	let path;
 
@@ -4902,7 +4902,7 @@ var app = (function () {
     			attr_dev(path, "id", "user-anonymous");
     			attr_dev(path, "d", "M101.071 130.293V130.088C101.075 129.384 101.138 128.822 101.259 128.404C101.383 127.985 101.564 127.647 101.802 127.39C102.039 127.132 102.325 126.899 102.659 126.689C102.909 126.528 103.132 126.361 103.329 126.188C103.526 126.015 103.683 125.824 103.8 125.615C103.917 125.401 103.975 125.164 103.975 124.902C103.975 124.625 103.909 124.381 103.776 124.172C103.643 123.963 103.464 123.802 103.239 123.689C103.017 123.576 102.772 123.52 102.502 123.52C102.241 123.52 101.993 123.578 101.76 123.695C101.526 123.808 101.335 123.977 101.186 124.202C101.037 124.423 100.957 124.699 100.945 125.029H98.4816C98.5017 124.224 98.6949 123.56 99.0611 123.037C99.4274 122.51 99.9123 122.117 100.516 121.86C101.12 121.598 101.786 121.467 102.514 121.467C103.315 121.467 104.023 121.6 104.639 121.866C105.255 122.127 105.738 122.508 106.088 123.007C106.438 123.506 106.613 124.107 106.613 124.812C106.613 125.283 106.535 125.701 106.378 126.067C106.225 126.43 106.01 126.752 105.732 127.033C105.454 127.311 105.126 127.563 104.748 127.788C104.43 127.977 104.168 128.174 103.963 128.38C103.762 128.585 103.611 128.822 103.51 129.092C103.414 129.362 103.363 129.694 103.359 130.088V130.293H101.071ZM102.267 134.157C101.864 134.157 101.52 134.016 101.234 133.734C100.953 133.449 100.814 133.107 100.818 132.708C100.814 132.314 100.953 131.976 101.234 131.694C101.52 131.412 101.864 131.271 102.267 131.271C102.649 131.271 102.985 131.412 103.275 131.694C103.565 131.976 103.712 132.314 103.716 132.708C103.712 132.974 103.641 133.217 103.504 133.439C103.371 133.656 103.196 133.831 102.979 133.964C102.762 134.093 102.524 134.157 102.267 134.157Z");
     			attr_dev(path, "fill", "black");
-    			add_location(path, file$2, 718, 5, 23298);
+    			add_location(path, file$2, 721, 5, 23303);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, path, anchor);
@@ -4916,14 +4916,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(718:4) {:else}",
+    		source: "(721:4) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (712:4) {#if user.email}
+    // (715:4) {#if user.email}
     function create_if_block$1(ctx) {
     	let path;
 
@@ -4933,7 +4933,7 @@ var app = (function () {
     			attr_dev(path, "id", "user-logged");
     			attr_dev(path, "d", "M96.4768 127.553L98.1792 125.844L100.974 128.591L107.174 122.415L108.889 124.124L100.974 131.996L96.4768 127.553Z");
     			attr_dev(path, "fill", "black");
-    			add_location(path, file$2, 712, 5, 23101);
+    			add_location(path, file$2, 715, 5, 23106);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, path, anchor);
@@ -4947,14 +4947,14 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(712:4) {#if user.email}",
+    		source: "(715:4) {#if user.email}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (364:1) {#each focusTasks as task, index}
+    // (367:1) {#each focusTasks as task, index}
     function create_each_block$1(ctx) {
     	let g17;
     	let text0;
@@ -5122,7 +5122,7 @@ var app = (function () {
     			attr_dev(text0, "font-weight", "800");
     			attr_dev(text0, "stroke", "black");
     			attr_dev(text0, "fill", "white");
-    			add_location(text0, file$2, 365, 3, 8383);
+    			add_location(text0, file$2, 368, 3, 8388);
     			attr_dev(text1, "id", "status");
     			attr_dev(text1, "x", "176");
     			attr_dev(text1, "y", "140");
@@ -5130,63 +5130,63 @@ var app = (function () {
     			attr_dev(text1, "font-weight", "800");
     			attr_dev(text1, "stroke", "black");
     			attr_dev(text1, "fill", "white");
-    			add_location(text1, file$2, 376, 3, 8596);
+    			add_location(text1, file$2, 379, 3, 8601);
     			attr_dev(p, "xmlns", "http://www.w3.org/1999/xhtml");
     			attr_dev(p, "class", "title");
-    			add_location(p, file$2, 388, 4, 8837);
+    			add_location(p, file$2, 391, 4, 8842);
     			attr_dev(foreignObject, "id", "title");
     			attr_dev(foreignObject, "x", "41");
     			attr_dev(foreignObject, "y", "200");
     			attr_dev(foreignObject, "width", "350");
     			attr_dev(foreignObject, "height", "300");
-    			add_location(foreignObject, file$2, 387, 3, 8766);
+    			add_location(foreignObject, file$2, 390, 3, 8771);
     			attr_dev(circle0, "id", "Ellipse 2");
     			attr_dev(circle0, "cx", "346");
     			attr_dev(circle0, "cy", "596");
     			attr_dev(circle0, "r", "49.5");
     			attr_dev(circle0, "fill", "#2CC990");
     			attr_dev(circle0, "stroke", "black");
-    			add_location(circle0, file$2, 398, 4, 9087);
+    			add_location(circle0, file$2, 401, 4, 9092);
     			attr_dev(path0, "id", "Vector 1");
     			attr_dev(path0, "d", "M364.736 572.467L337.325 600.189L326.697 589.157C326.697 589.157 321.103 584.348 315.788 589.157C310.474 593.966 314.39 600.189 314.39 600.189L331.731 617.728C331.731 617.728 335.334 620.17 337.885 619.991C340.031 619.84 342.92 617.728 342.92 617.728L376.484 583.782C376.484 583.782 380.4 578.691 375.645 573.599C370.89 568.507 364.736 572.467 364.736 572.467Z");
     			attr_dev(path0, "fill", "white");
     			attr_dev(path0, "stroke", "black");
-    			add_location(path0, file$2, 406, 4, 9208);
+    			add_location(path0, file$2, 409, 4, 9213);
     			attr_dev(g0, "id", "check");
     			attr_dev(g0, "opacity", "0.75");
     			attr_dev(g0, "style", g0_style_value = `${!/*task*/ ctx[53] ? "display:none" : ""}`);
-    			add_location(g0, file$2, 392, 3, 8973);
+    			add_location(g0, file$2, 395, 3, 8978);
     			attr_dev(circle1, "id", "Ellipse 2");
     			attr_dev(circle1, "cx", "346");
     			attr_dev(circle1, "cy", "596");
     			attr_dev(circle1, "r", "49.5");
     			attr_dev(circle1, "fill", "#2C82C9");
     			attr_dev(circle1, "stroke", "black");
-    			add_location(circle1, file$2, 414, 4, 9719);
+    			add_location(circle1, file$2, 417, 4, 9724);
     			attr_dev(path1, "id", "Vector 1");
     			attr_dev(path1, "d", "M364.736 572.467L337.325 600.189L326.697 589.157C326.697 589.157 321.103 584.348 315.788 589.157C310.474 593.966 314.39 600.189 314.39 600.189L331.731 617.728C331.731 617.728 335.334 620.17 337.885 619.991C340.031 619.84 342.92 617.728 342.92 617.728L376.484 583.782C376.484 583.782 380.4 578.691 375.645 573.599C370.89 568.507 364.736 572.467 364.736 572.467Z");
     			attr_dev(path1, "fill", "white");
     			attr_dev(path1, "stroke", "black");
-    			add_location(path1, file$2, 422, 4, 9840);
+    			add_location(path1, file$2, 425, 4, 9845);
     			attr_dev(g1, "id", "check_add");
     			attr_dev(g1, "opacity", "0.75");
-    			add_location(g1, file$2, 413, 3, 9659);
+    			add_location(g1, file$2, 416, 3, 9664);
     			attr_dev(circle2, "id", "Ellipse 2_2");
     			attr_dev(circle2, "cx", "210");
     			attr_dev(circle2, "cy", "708");
     			attr_dev(circle2, "r", "47");
     			attr_dev(circle2, "stroke", "#2CC990");
     			attr_dev(circle2, "stroke-width", "6");
-    			add_location(circle2, file$2, 430, 4, 10329);
+    			add_location(circle2, file$2, 433, 4, 10334);
     			attr_dev(path2, "id", "Vector 1_2");
     			attr_dev(path2, "d", "M228.736 684.467L201.325 712.189L190.697 701.157C190.697 701.157 185.103 696.348 179.788 701.157C174.474 705.966 178.39 712.189 178.39 712.189L195.731 729.728C195.731 729.728 199.334 732.17 201.885 731.991C204.031 731.84 206.92 729.728 206.92 729.728L240.484 695.782C240.484 695.782 244.4 690.691 239.645 685.599C234.89 680.507 228.736 684.467 228.736 684.467Z");
     			attr_dev(path2, "fill", "white");
     			attr_dev(path2, "stroke", "#2CC990");
     			attr_dev(path2, "stroke-width", "6");
-    			add_location(path2, file$2, 438, 4, 10454);
+    			add_location(path2, file$2, 441, 4, 10459);
     			attr_dev(g2, "id", "completed");
     			attr_dev(g2, "opacity", "0.75");
-    			add_location(g2, file$2, 429, 3, 10291);
+    			add_location(g2, file$2, 432, 3, 10296);
     			attr_dev(circle3, "cx", "210");
     			attr_dev(circle3, "cy", "596");
     			attr_dev(circle3, "r", "56");
@@ -5195,7 +5195,7 @@ var app = (function () {
     			attr_dev(circle3, "stroke-width", "8");
     			attr_dev(circle3, "stroke-dasharray", circle3_stroke_dasharray_value = `calc(${/*enlapsedTime*/ ctx[4] / /*maxTime*/ ctx[9]} * ${2 * Math.PI * 56}) ${2 * Math.PI * 56}`);
     			set_style(circle3, "transform", "translate(210px, 596px) rotate(-90deg) translate(-210px, -596px)");
-    			add_location(circle3, file$2, 447, 4, 10967);
+    			add_location(circle3, file$2, 450, 4, 10972);
     			attr_dev(text2, "id", "title");
     			attr_dev(text2, "x", "165");
     			attr_dev(text2, "y", "610");
@@ -5203,48 +5203,48 @@ var app = (function () {
     			attr_dev(text2, "font-weight", "800");
     			attr_dev(text2, "stroke", "black");
     			attr_dev(text2, "fill", "white");
-    			add_location(text2, file$2, 459, 4, 11297);
+    			add_location(text2, file$2, 462, 4, 11302);
     			attr_dev(g3, "id", "playing");
     			attr_dev(g3, "opacity", "0.75");
-    			add_location(g3, file$2, 446, 3, 10931);
+    			add_location(g3, file$2, 449, 3, 10936);
     			attr_dev(circle4, "id", "Ellipse 2_3");
     			attr_dev(circle4, "cx", "210");
     			attr_dev(circle4, "cy", "596");
     			attr_dev(circle4, "r", "49.5");
     			attr_dev(circle4, "fill", "#2C82C9");
     			attr_dev(circle4, "stroke", "black");
-    			add_location(circle4, file$2, 479, 4, 11649);
+    			add_location(circle4, file$2, 482, 4, 11654);
     			attr_dev(path3, "id", "Vector 13");
     			attr_dev(path3, "d", "M189.171 563.791C185.845 566.211 185.845 569.563 185.845 569.563V622.881C185.845 622.881 186.348 626.889 190.541 628.848C194.733 630.808 197.682 628.848 197.682 628.848L240.239 602.434C240.239 602.434 242.927 600.282 242.88 596.075C242.833 591.868 240.239 589.912 240.239 589.912L197.682 563.791C197.682 563.791 192.905 561.074 189.171 563.791Z");
     			attr_dev(path3, "fill", "white");
     			attr_dev(path3, "stroke", "black");
-    			add_location(path3, file$2, 487, 4, 11772);
+    			add_location(path3, file$2, 490, 4, 11777);
     			attr_dev(g4, "id", "play");
     			attr_dev(g4, "opacity", "0.75");
     			attr_dev(g4, "style", g4_style_value = `${!/*task*/ ctx[53] ? "display:none" : ""}`);
-    			add_location(g4, file$2, 473, 3, 11537);
+    			add_location(g4, file$2, 476, 3, 11542);
     			attr_dev(circle5, "id", "Ellipse 2_3");
     			attr_dev(circle5, "cx", "210");
     			attr_dev(circle5, "cy", "596");
     			attr_dev(circle5, "r", "49.5");
     			attr_dev(circle5, "fill", "#2C82C9");
     			attr_dev(circle5, "stroke", "black");
-    			add_location(circle5, file$2, 495, 4, 12266);
+    			add_location(circle5, file$2, 498, 4, 12271);
     			attr_dev(path4, "id", "Vector 13");
     			attr_dev(path4, "d", "M189.171 563.791C185.845 566.211 185.845 569.563 185.845 569.563V622.881C185.845 622.881 186.348 626.889 190.541 628.848C194.733 630.808 197.682 628.848 197.682 628.848L240.239 602.434C240.239 602.434 242.927 600.282 242.88 596.075C242.833 591.868 240.239 589.912 240.239 589.912L197.682 563.791C197.682 563.791 192.905 561.074 189.171 563.791Z");
     			attr_dev(path4, "fill", "white");
     			attr_dev(path4, "stroke", "black");
-    			add_location(path4, file$2, 503, 4, 12389);
+    			add_location(path4, file$2, 506, 4, 12394);
     			attr_dev(g5, "id", "add_play");
     			attr_dev(g5, "opacity", "0.75");
-    			add_location(g5, file$2, 494, 3, 12208);
+    			add_location(g5, file$2, 497, 3, 12213);
     			attr_dev(circle6, "id", "Ellipse 3_2");
     			attr_dev(circle6, "cx", "210");
     			attr_dev(circle6, "cy", "596");
     			attr_dev(circle6, "r", "49.5");
     			attr_dev(circle6, "fill", "#2C82C9");
     			attr_dev(circle6, "stroke", "black");
-    			add_location(circle6, file$2, 511, 4, 12878);
+    			add_location(circle6, file$2, 514, 4, 12883);
     			attr_dev(rect0, "id", "Rectangle 1");
     			attr_dev(rect0, "x", "191.5");
     			attr_dev(rect0, "y", "577.5");
@@ -5252,7 +5252,7 @@ var app = (function () {
     			attr_dev(rect0, "height", "37");
     			attr_dev(rect0, "fill", "white");
     			attr_dev(rect0, "stroke", "black");
-    			add_location(rect0, file$2, 519, 4, 13001);
+    			add_location(rect0, file$2, 522, 4, 13006);
     			attr_dev(rect1, "id", "Rectangle 2");
     			attr_dev(rect1, "x", "216.5");
     			attr_dev(rect1, "y", "577.5");
@@ -5260,45 +5260,45 @@ var app = (function () {
     			attr_dev(rect1, "height", "37");
     			attr_dev(rect1, "fill", "white");
     			attr_dev(rect1, "stroke", "black");
-    			add_location(rect1, file$2, 528, 4, 13141);
+    			add_location(rect1, file$2, 531, 4, 13146);
     			attr_dev(g6, "id", "pause");
     			attr_dev(g6, "opacity", "0.75");
-    			add_location(g6, file$2, 510, 3, 12825);
+    			add_location(g6, file$2, 513, 3, 12830);
     			attr_dev(circle7, "id", "Ellipse 3_3");
     			attr_dev(circle7, "cx", "210");
     			attr_dev(circle7, "cy", "708");
     			attr_dev(circle7, "r", "49.5");
     			attr_dev(circle7, "fill", "#2C82C9");
     			attr_dev(circle7, "stroke", "black");
-    			add_location(circle7, file$2, 539, 4, 13343);
+    			add_location(circle7, file$2, 542, 4, 13348);
     			attr_dev(path5, "id", "Vector 14");
     			attr_dev(path5, "d", "M204 743.075V732.356C204 732.356 194.649 730.139 189.911 724.504C185.435 719.181 182.996 706.708 182.996 706.708C182.996 706.708 183.795 705 186.558 705C189.911 705 190.899 706.708 190.899 706.708C190.899 706.708 192.009 714.675 195.453 718.898C199.711 724.117 203.273 725.352 210.008 725.349C216.738 725.346 220.307 724.124 224.546 718.898C228.013 714.623 229.037 706.771 229.037 706.771C229.037 706.771 230.057 705 233.568 705C236.354 705 236.972 706.771 236.972 706.771C236.972 706.771 234.504 719.172 230.057 724.472C225.33 730.105 216 732.356 216 732.356V743.075C216 743.075 215.537 744.894 210 744.894C204.463 744.894 204 743.075 204 743.075Z");
     			attr_dev(path5, "fill", "white");
     			attr_dev(path5, "stroke", "black");
-    			add_location(path5, file$2, 547, 4, 13466);
+    			add_location(path5, file$2, 550, 4, 13471);
     			attr_dev(path6, "id", "Vector 15");
     			attr_dev(path6, "d", "M195.107 685.475V708.416C195.107 708.416 195.04 721.9 209.985 721.9C224.93 721.9 224.934 708.416 224.934 708.416V685.475C224.934 685.475 224.934 672 209.985 672C195.036 672 195.107 685.475 195.107 685.475Z");
     			attr_dev(path6, "fill", "white");
     			attr_dev(path6, "stroke", "black");
-    			add_location(path6, file$2, 553, 4, 14199);
+    			add_location(path6, file$2, 556, 4, 14204);
     			attr_dev(g7, "id", "record");
     			attr_dev(g7, "opacity", "0.75");
-    			add_location(g7, file$2, 538, 3, 13288);
+    			add_location(g7, file$2, 541, 3, 13293);
     			attr_dev(circle8, "cx", "210");
     			attr_dev(circle8, "cy", "708");
     			attr_dev(circle8, "fill", "transparent");
     			attr_dev(circle8, "stroke", "#2C82C9");
-    			add_location(circle8, file$2, 561, 4, 14534);
+    			add_location(circle8, file$2, 564, 4, 14539);
     			attr_dev(g8, "id", "recording");
     			attr_dev(g8, "opacity", "0.75");
-    			add_location(g8, file$2, 560, 3, 14496);
+    			add_location(g8, file$2, 563, 3, 14501);
     			attr_dev(circle9, "id", "Ellipse 3_4");
     			attr_dev(circle9, "cx", "80");
     			attr_dev(circle9, "cy", "596");
     			attr_dev(circle9, "r", "49.5");
     			attr_dev(circle9, "fill", "#FCB941");
     			attr_dev(circle9, "stroke", "black");
-    			add_location(circle9, file$2, 564, 4, 14661);
+    			add_location(circle9, file$2, 567, 4, 14666);
     			attr_dev(rect2, "id", "Rectangle 1_2");
     			attr_dev(rect2, "x", "61.5");
     			attr_dev(rect2, "y", "577.5");
@@ -5306,130 +5306,130 @@ var app = (function () {
     			attr_dev(rect2, "height", "37");
     			attr_dev(rect2, "fill", "white");
     			attr_dev(rect2, "stroke", "black");
-    			add_location(rect2, file$2, 572, 4, 14783);
+    			add_location(rect2, file$2, 575, 4, 14788);
     			attr_dev(g9, "id", "stop");
     			attr_dev(g9, "opacity", "0.75");
-    			add_location(g9, file$2, 563, 3, 14610);
+    			add_location(g9, file$2, 566, 3, 14615);
     			attr_dev(circle10, "id", "Ellipse 3_5");
     			attr_dev(circle10, "cx", "80");
     			attr_dev(circle10, "cy", "596");
     			attr_dev(circle10, "r", "49.5");
     			attr_dev(circle10, "fill", "#FCB941");
     			attr_dev(circle10, "stroke", "black");
-    			add_location(circle10, file$2, 583, 4, 14985);
+    			add_location(circle10, file$2, 586, 4, 14990);
     			attr_dev(path7, "id", "Vector 21");
     			attr_dev(path7, "d", "M116.473 596.106C116.473 587.41 108.876 588.142 108.876 588.142H81.5053V573.129L41.6855 596.106L81.5053 619.357V604.802H108.876C108.876 604.802 116.473 604.802 116.473 596.106Z");
     			attr_dev(path7, "fill", "white");
     			attr_dev(path7, "stroke", "black");
-    			add_location(path7, file$2, 591, 4, 15107);
+    			add_location(path7, file$2, 594, 4, 15112);
     			attr_dev(g10, "id", "back");
     			attr_dev(g10, "opacity", "0.75");
-    			add_location(g10, file$2, 582, 3, 14931);
+    			add_location(g10, file$2, 585, 3, 14936);
     			attr_dev(circle11, "id", "Ellipse 4");
     			attr_dev(circle11, "cx", "210");
     			attr_dev(circle11, "cy", "708");
     			attr_dev(circle11, "r", "49.5");
     			attr_dev(circle11, "fill", "#FC6042");
     			attr_dev(circle11, "stroke", "black");
-    			add_location(circle11, file$2, 604, 4, 15491);
+    			add_location(circle11, file$2, 607, 4, 15496);
     			attr_dev(path8, "id", "Vector 2");
     			attr_dev(path8, "d", "M194.5 685C193.884 685.047 193 685.5 193 685.5L187.5 691C187.5 691 187 691.883 187 692.5C187 693.117 187.5 694 187.5 694L201 708L187.5 721.5C187.5 721.5 186.571 722.3 186.5 723C186.438 723.614 187 724.5 187 724.5L193 730.5C193 730.5 193.801 731.413 194.5 731.5C195.366 731.608 196.5 730.5 196.5 730.5L210 717.5L223.5 730.5C223.5 730.5 224.697 731.062 225.5 731C226.116 730.953 227 730.5 227 730.5L233 724.5C233 724.5 233.587 723.611 233.5 723C233.438 722.568 233 722 233 722L219 708L233 694C233 694 233.587 693.111 233.5 692.5C233.438 692.068 233 691.5 233 691.5L227 685.5C227 685.5 226.117 685 225.5 685C224.883 685 224 685.5 224 685.5L210 699L196.5 685.5C196.5 685.5 195.303 684.938 194.5 685Z");
     			attr_dev(path8, "fill", "white");
     			attr_dev(path8, "stroke", "black");
-    			add_location(path8, file$2, 612, 4, 15612);
+    			add_location(path8, file$2, 615, 4, 15617);
     			attr_dev(g11, "id", "cancel");
     			attr_dev(g11, "opacity", "0.75");
     			attr_dev(g11, "style", g11_style_value = `${!/*task*/ ctx[53] ? "display:none" : ""}`);
-    			add_location(g11, file$2, 598, 3, 15375);
+    			add_location(g11, file$2, 601, 3, 15380);
     			attr_dev(circle12, "id", "Ellipse 4_2");
     			attr_dev(circle12, "cx", "210");
     			attr_dev(circle12, "cy", "708");
     			attr_dev(circle12, "r", "47");
     			attr_dev(circle12, "stroke", "#FC6042");
     			attr_dev(circle12, "stroke-width", "6");
-    			add_location(circle12, file$2, 620, 4, 16435);
+    			add_location(circle12, file$2, 623, 4, 16440);
     			attr_dev(path9, "id", "Vector 2_2");
     			attr_dev(path9, "d", "M194.5 685C193.884 685.047 193 685.5 193 685.5L187.5 691C187.5 691 187 691.883 187 692.5C187 693.117 187.5 694 187.5 694L201 708L187.5 721.5C187.5 721.5 186.571 722.3 186.5 723C186.438 723.614 187 724.5 187 724.5L193 730.5C193 730.5 193.801 731.413 194.5 731.5C195.366 731.608 196.5 730.5 196.5 730.5L210 717.5L223.5 730.5C223.5 730.5 224.697 731.062 225.5 731C226.116 730.953 227 730.5 227 730.5L233 724.5C233 724.5 233.587 723.611 233.5 723C233.438 722.568 233 722 233 722L219 708L233 694C233 694 233.587 693.111 233.5 692.5C233.438 692.068 233 691.5 233 691.5L227 685.5C227 685.5 226.117 685 225.5 685C224.883 685 224 685.5 224 685.5L210 699L196.5 685.5C196.5 685.5 195.303 684.938 194.5 685Z");
     			attr_dev(path9, "fill", "white");
     			attr_dev(path9, "stroke", "#FC6042");
     			attr_dev(path9, "stroke-width", "6");
-    			add_location(path9, file$2, 628, 4, 16560);
+    			add_location(path9, file$2, 631, 4, 16565);
     			attr_dev(g12, "id", "canceled");
     			attr_dev(g12, "opacity", "0.75");
-    			add_location(g12, file$2, 619, 3, 16398);
+    			add_location(g12, file$2, 622, 3, 16403);
     			attr_dev(circle13, "id", "Ellipse 1");
     			attr_dev(circle13, "cx", "350");
     			attr_dev(circle13, "cy", "108");
     			attr_dev(circle13, "r", "49.5");
     			attr_dev(circle13, "fill", "#2C82C9");
     			attr_dev(circle13, "stroke", "black");
-    			add_location(circle13, file$2, 637, 4, 17421);
+    			add_location(circle13, file$2, 640, 4, 17426);
     			attr_dev(path10, "id", "Vector 2_3");
     			attr_dev(path10, "d", "M322.599 102.772C322.197 103.241 321.892 104.186 321.892 104.186L321.892 111.964C321.892 111.964 322.163 112.942 322.599 113.378C323.036 113.815 324.013 114.085 324.013 114.085L343.459 114.439L343.459 133.531C343.459 133.531 343.367 134.753 343.812 135.299C344.203 135.777 345.227 136.006 345.227 136.006L353.712 136.006C353.712 136.006 354.924 136.084 355.48 135.652C356.169 135.116 356.187 133.531 356.187 133.531L356.54 114.793L375.279 114.439C375.279 114.439 376.523 113.99 377.046 113.378C377.448 112.91 377.754 111.964 377.754 111.964V103.479C377.754 103.479 377.54 102.435 377.046 102.065C376.697 101.803 375.986 101.711 375.986 101.711H356.187V81.9121C356.187 81.9121 355.974 80.8684 355.48 80.4979C355.13 80.2359 354.419 80.1443 354.419 80.1443L345.934 80.1443C345.934 80.1443 344.956 80.4148 344.52 80.8514C344.083 81.288 343.812 82.2656 343.812 82.2656L343.459 101.711L324.367 101.711C324.367 101.711 323.123 102.16 322.599 102.772Z");
     			attr_dev(path10, "fill", "white");
     			attr_dev(path10, "stroke", "black");
-    			add_location(path10, file$2, 645, 4, 17542);
+    			add_location(path10, file$2, 648, 4, 17547);
     			attr_dev(g13, "id", "add");
     			attr_dev(g13, "opacity", "0.75");
-    			add_location(g13, file$2, 636, 3, 17372);
+    			add_location(g13, file$2, 639, 3, 17377);
     			attr_dev(circle14, "id", "Ellipse 1_2");
     			attr_dev(circle14, "cx", "350");
     			attr_dev(circle14, "cy", "108");
     			attr_dev(circle14, "r", "49.5");
     			attr_dev(circle14, "fill", "#2C82C9");
     			attr_dev(circle14, "stroke", "black");
-    			add_location(circle14, file$2, 653, 4, 18633);
+    			add_location(circle14, file$2, 656, 4, 18638);
     			attr_dev(path11, "id", "Vector 17");
     			attr_dev(path11, "d", "M318.414 107.781C318.387 106.071 318.414 103.43 318.414 103.43H330.523V107.749C330.523 120.124 340.85 127.567 349.809 127.567C360.607 127.567 366.214 118.979 366.214 118.979L363.394 116.649C363.394 116.649 363.207 116.403 363.301 116.23C363.394 116.057 363.73 116.119 363.73 116.119H378.154V130.308C378.154 130.308 378.021 130.805 377.778 130.819C377.534 130.833 377.109 130.308 377.109 130.308L374.684 127.567C374.684 127.567 366.224 139.498 349.809 139.498C333.046 139.498 318.692 125.897 318.414 107.781Z");
     			attr_dev(path11, "fill", "white");
     			attr_dev(path11, "stroke", "black");
-    			add_location(path11, file$2, 661, 4, 18756);
+    			add_location(path11, file$2, 664, 4, 18761);
     			attr_dev(path12, "id", "Vector 19");
     			attr_dev(path12, "d", "M381.711 108.147C381.738 109.857 381.711 112.498 381.711 112.498H369.602V108.179C369.602 95.8036 359.275 88.3613 350.316 88.3613C339.518 88.3613 333.911 96.9485 333.911 96.9485L336.731 99.2789C336.731 99.2789 336.917 99.5249 336.824 99.6981C336.731 99.8714 336.394 99.8089 336.394 99.8089H321.971V85.6196C321.971 85.6196 322.104 85.1227 322.347 85.1088C322.591 85.095 323.016 85.6196 323.016 85.6196L325.441 88.3613C325.441 88.3613 333.901 76.4298 350.316 76.4298C367.079 76.4298 381.433 90.0311 381.711 108.147Z");
     			attr_dev(path12, "fill", "white");
     			attr_dev(path12, "stroke", "black");
-    			add_location(path12, file$2, 667, 4, 19348);
+    			add_location(path12, file$2, 670, 4, 19353);
     			attr_dev(g14, "id", "reopen");
     			attr_dev(g14, "opacity", "0.75");
-    			add_location(g14, file$2, 652, 3, 18578);
+    			add_location(g14, file$2, 655, 3, 18583);
     			attr_dev(circle15, "id", "Ellipse 1_3");
     			attr_dev(circle15, "cx", "82");
     			attr_dev(circle15, "cy", "108");
     			attr_dev(circle15, "r", "49.5");
     			attr_dev(circle15, "fill", "#2C82C9");
     			attr_dev(circle15, "stroke", "black");
-    			add_location(circle15, file$2, 675, 4, 20005);
+    			add_location(circle15, file$2, 678, 4, 20010);
     			attr_dev(path13, "fill-rule", "evenodd");
     			attr_dev(path13, "clip-rule", "evenodd");
     			attr_dev(path13, "d", "M89.9573 110.352C95.7814 107.39 99.7715 101.341 99.7715 94.3596C99.7715 84.4572 91.744 76.4298 81.8416 76.4298C71.9393 76.4298 63.9118 84.4572 63.9118 94.3596C63.9118 101.391 67.9597 107.478 73.8524 110.415C70.1911 111.656 66.8258 113.727 64.0408 116.512C59.2777 121.275 56.6019 127.735 56.6019 134.471L82 134.471H107.398C107.398 127.735 104.722 121.275 99.9592 116.512C97.126 113.679 93.6923 111.584 89.9573 110.352Z");
-    			add_location(path13, file$2, 685, 6, 20199);
+    			add_location(path13, file$2, 688, 6, 20204);
     			attr_dev(mask, "id", "path-31-inside-2_1_5");
     			attr_dev(mask, "fill", "white");
-    			add_location(mask, file$2, 684, 5, 20147);
+    			add_location(mask, file$2, 687, 5, 20152);
     			attr_dev(path14, "fill-rule", "evenodd");
     			attr_dev(path14, "clip-rule", "evenodd");
     			attr_dev(path14, "d", "M89.9573 110.352C95.7814 107.39 99.7715 101.341 99.7715 94.3596C99.7715 84.4572 91.744 76.4298 81.8416 76.4298C71.9393 76.4298 63.9118 84.4572 63.9118 94.3596C63.9118 101.391 67.9597 107.478 73.8524 110.415C70.1911 111.656 66.8258 113.727 64.0408 116.512C59.2777 121.275 56.6019 127.735 56.6019 134.471L82 134.471H107.398C107.398 127.735 104.722 121.275 99.9592 116.512C97.126 113.679 93.6923 111.584 89.9573 110.352Z");
     			attr_dev(path14, "fill", "white");
-    			add_location(path14, file$2, 691, 5, 20715);
+    			add_location(path14, file$2, 694, 5, 20720);
     			attr_dev(path15, "d", "M89.9573 110.352L89.504 109.46L87.3633 110.549L89.644 111.301L89.9573 110.352ZM73.8524 110.415L74.1732 111.363L76.4479 110.592L74.2986 109.521L73.8524 110.415ZM64.0408 116.512L63.3337 115.805L63.3337 115.805L64.0408 116.512ZM56.6019 134.471H55.6019V135.471L56.6019 135.471L56.6019 134.471ZM82 134.471L82 135.471H82V134.471ZM107.398 134.471V135.471H108.398V134.471H107.398ZM99.9592 116.512L99.2521 117.219L99.2521 117.219L99.9592 116.512ZM98.7715 94.3596C98.7715 100.95 95.0058 106.663 89.504 109.46L90.4105 111.243C96.557 108.118 100.771 101.732 100.771 94.3596H98.7715ZM81.8416 77.4298C91.1917 77.4298 98.7715 85.0095 98.7715 94.3596H100.771C100.771 83.9049 92.2963 75.4298 81.8416 75.4298V77.4298ZM64.9118 94.3596C64.9118 85.0095 72.4916 77.4298 81.8416 77.4298V75.4298C71.387 75.4298 62.9118 83.9049 62.9118 94.3596H64.9118ZM74.2986 109.521C68.7321 106.745 64.9118 100.998 64.9118 94.3596H62.9118C62.9118 101.785 67.1873 108.21 73.4062 111.31L74.2986 109.521ZM73.5316 109.468C69.7262 110.757 66.2284 112.91 63.3337 115.805L64.7479 117.219C67.4233 114.544 70.656 112.554 74.1732 111.363L73.5316 109.468ZM63.3337 115.805C58.3831 120.756 55.6019 127.47 55.6019 134.471H57.6019C57.6019 128 60.1724 121.795 64.7479 117.219L63.3337 115.805ZM56.6019 135.471L82 135.471L82 133.471L56.6019 133.471L56.6019 135.471ZM82 135.471H107.398V133.471H82V135.471ZM108.398 134.471C108.398 127.47 105.617 120.756 100.666 115.805L99.2521 117.219C103.828 121.795 106.398 128 106.398 134.471H108.398ZM100.666 115.805C97.7215 112.86 94.1526 110.683 90.2706 109.402L89.644 111.301C93.232 112.485 96.5304 114.498 99.2521 117.219L100.666 115.805Z");
     			attr_dev(path15, "fill", "black");
     			attr_dev(path15, "mask", "url(#path-31-inside-2_1_5)");
-    			add_location(path15, file$2, 697, 5, 21233);
+    			add_location(path15, file$2, 700, 5, 21238);
     			attr_dev(g15, "id", "Union");
-    			add_location(g15, file$2, 683, 4, 20127);
+    			add_location(g15, file$2, 686, 4, 20132);
     			attr_dev(circle16, "id", "Ellipse 28");
     			attr_dev(circle16, "cx", "102.334");
     			attr_dev(circle16, "cy", "126.739");
     			attr_dev(circle16, "r", "11.5");
     			attr_dev(circle16, "fill", "white");
     			attr_dev(circle16, "stroke", "black");
-    			add_location(circle16, file$2, 703, 4, 22951);
+    			add_location(circle16, file$2, 706, 4, 22956);
     			attr_dev(g16, "id", "login");
     			attr_dev(g16, "opacity", "0.75");
-    			add_location(g16, file$2, 674, 3, 19952);
+    			add_location(g16, file$2, 677, 3, 19957);
     			attr_dev(g17, "id", `g${/*index*/ ctx[55]}`);
     			attr_dev(g17, "class", g17_class_value = /*task*/ ctx[53]?.status || INACTIVE_STATUS);
-    			add_location(g17, file$2, 364, 2, 8319);
+    			add_location(g17, file$2, 367, 2, 8324);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, g17, anchor);
@@ -5571,7 +5571,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(364:1) {#each focusTasks as task, index}",
+    		source: "(367:1) {#each focusTasks as task, index}",
     		ctx
     	});
 
@@ -5629,29 +5629,29 @@ var app = (function () {
     			g0 = svg_element("g");
     			circle = svg_element("circle");
     			path = svg_element("path");
-    			add_location(textarea_1, file$2, 728, 2, 25110);
+    			add_location(textarea_1, file$2, 731, 2, 25115);
     			attr_dev(foreignObject, "id", "add-task-form");
     			attr_dev(foreignObject, "x", "41");
     			attr_dev(foreignObject, "y", "200");
     			attr_dev(foreignObject, "width", "350");
     			attr_dev(foreignObject, "height", "300");
-    			add_location(foreignObject, file$2, 727, 1, 25033);
+    			add_location(foreignObject, file$2, 730, 1, 25038);
     			attr_dev(circle, "id", "Ellipse 2");
     			attr_dev(circle, "cx", "346");
     			attr_dev(circle, "cy", "596");
     			attr_dev(circle, "r", "49.5");
     			attr_dev(circle, "fill", "#2CC990");
     			attr_dev(circle, "stroke", "black");
-    			add_location(circle, file$2, 733, 3, 25300);
+    			add_location(circle, file$2, 736, 3, 25305);
     			attr_dev(path, "id", "Vector 1");
     			attr_dev(path, "d", "M364.736 572.467L337.325 600.189L326.697 589.157C326.697 589.157 321.103 584.348 315.788 589.157C310.474 593.966 314.39 600.189 314.39 600.189L331.731 617.728C331.731 617.728 335.334 620.17 337.885 619.991C340.031 619.84 342.92 617.728 342.92 617.728L376.484 583.782C376.484 583.782 380.4 578.691 375.645 573.599C370.89 568.507 364.736 572.467 364.736 572.467Z");
     			attr_dev(path, "fill", "white");
     			attr_dev(path, "stroke", "black");
-    			add_location(path, file$2, 741, 3, 25413);
+    			add_location(path, file$2, 744, 3, 25418);
     			attr_dev(g0, "opacity", "0.75");
-    			add_location(g0, file$2, 732, 2, 25229);
+    			add_location(g0, file$2, 735, 2, 25234);
     			attr_dev(g1, "id", "aspectos");
-    			add_location(g1, file$2, 730, 1, 25163);
+    			add_location(g1, file$2, 733, 1, 25168);
     			attr_dev(g2, "class", g2_class_value = `${/*taskEffect*/ ctx[5]} ${/*addTaskEffect*/ ctx[6]}`);
 
     			attr_dev(g2, "style", g2_style_value = `
@@ -5663,7 +5663,7 @@ var app = (function () {
 	--pause_hide: ${/*WITHOUT_PAUSE*/ ctx[8] ? "block" : "none"};
 `);
 
-    			add_location(g2, file$2, 352, 0, 7989);
+    			add_location(g2, file$2, 355, 0, 7994);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -6138,9 +6138,13 @@ var app = (function () {
 
     	function pleaseTakeARest() {
     		if (play_last_lap_bell) {
-    			console.log("pleaseTakeARest() take a rest");
-    			last_lap_bell.play();
     			play_last_lap_bell = false;
+
+    			try {
+    				last_lap_bell.play();
+    			} catch(e) {
+    				console.error(e);
+    			}
     		}
     	}
 
