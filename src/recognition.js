@@ -1,8 +1,8 @@
-var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
-var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+var SpeechRecognition = SpeechRecognition || (typeof webkitSpeechRecognition === 'undefined' ? null : webkitSpeechRecognition);
+var SpeechGrammarList = SpeechGrammarList || (typeof webkitSpeechGrammarList === 'undefined' ? null : webkitSpeechGrammarList);
+var SpeechRecognitionEvent = SpeechRecognitionEvent || (typeof webkitSpeechRecognitionEvent === 'undefined' ? null : webkitSpeechRecognitionEvent);
 
-var recognition = new SpeechRecognition();
+var recognition = SpeechRecognition && new SpeechRecognition();
 let max_stops = 2;
 
 export default {
@@ -10,6 +10,9 @@ export default {
 	start(handler) {
 		const self = this;
 		max_stops = 2;
+		if (!recognition) {
+			return;
+		}
 		recognition.start();
 		recognition.onresult = function (event) {
 
@@ -41,10 +44,16 @@ export default {
 		};
 	},
 	stop() {
+		if (!recognition) {
+			return;
+		}
 		max_stops = 0;
 		recognition.stop();
 	},
 	toggle() {
+		if (!recognition) {
+			return;
+		}
 		if (this.recording) {
 			recognition.stop();
 		} else {
