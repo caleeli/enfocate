@@ -27,6 +27,10 @@
 		logout();
 		push("/");
 	}
+
+	function back() {
+		push("/");
+	}
 </script>
 
 <g id="Login">
@@ -65,7 +69,7 @@
 			stroke="black"
 		/>
 	</g>
-	<g id="back" opacity="0.75">
+	<g opacity="0.75" on:click={back}>
 		<circle
 			id="Ellipse 3"
 			cx="80"
